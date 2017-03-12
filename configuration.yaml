@@ -1,107 +1,42 @@
 homeassistant:
-  # Name of the location where Home Assistant is running
   name: Home
-  # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude
   longitude: !secret longitude
-  # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 515
-  # metric for Metric, imperial for Imperial
   unit_system: metric
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Berlin
 
-# Show links to resources in log and frontend
-# introduction:
-
-# Enables the frontend
 frontend:
 
-# Enables configuration UI
 config:
 
 http:
-  # Uncomment this to add a password (recommended!)
   api_password: !secret http_password
-  # Uncomment this if you are using SSL or running in Docker etc
-  # base_url: example.duckdns.org:8123
 
-# Checks for available updates
 updater:
 
-# Discover some devices automatically
 discovery:
 
-# Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
-# Enables support for tracking state changes over time.
 history:
 
-# View all events in a logbook
 logbook:
 
-# Track the sun
 sun:
 
-# Weather Prediction
-sensor:
-  - platform: yr
-  - platform: time_date
-    display_options: 
-      - 'time'
+sensor: !include sensor.yaml
 
-
-
-# Text to speech
 tts:
   platform: google
 
-light:
-  platform: limitlessled
-  bridges:
-    - host: 192.168.178.42
-      version: 6
-      port: 5987
-      groups:
-      - number: 3
-        name: Flur
-        type: rgbw
-      - number: 2
-        name: Küche
-        type: rgbw
-      - number: 1
-        type: rgbw
-        name: Wohnung
-
-
+light: !include light.yaml
 
 ifttt:
   key: !secret ifttt
 
+automation: !include automation.yaml
 
-automation:
-  - alias: "Aufstehen unter der Woche"
-    trigger:
-      - platform: time
-        hours: 6
-        minutes: 30
-        seconds: 00
-    condition:
-    - condition: time
-      weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-    action:
-      service: homeassistant.turn_on
-      entity_id: light.wohnung
-      data:
-        brightness: 50
+device_tracker: !include device_tracker.yaml
 
 
-
-device_tracker:
-  - platform: fritz
