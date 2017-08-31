@@ -5,38 +5,83 @@ homeassistant:
   elevation: 515
   unit_system: metric
   time_zone: Europe/Berlin
+  customize:
+    sensor.time:
+      friendly_name: Uhrzeit
+    sensor.yr_symbol:
+      friendly_name: Wetter
+    sensor.yr_temperature:
+      friendly_name: Temperatur draußen
+    sensor.yr_humidity:
+      friendly_name: Luftfeuchtigkeit draußen
+    sun.sun:
+      friendly_name: Sonnenstand
 
-frontend:
+    # xiaomi
+    light.gateway_light_286c0788b99e:
+      friendly_name: Xiaomi Gateway
+    switch.switch_long_press_158d000156295f:
+      friendly_name: Xiaomi Button halten
+    switch.switch_one_click_158d000156295f:
+      friendly_name: Xiaomi Button Klick
+    switch.switch_double_click_158d000156295f:
+      friendly_name: Xiaomi Button Doppelklick
+    binary_sensor.door_window_sensor_158d00011c8d52:
+      friendly_name: Haustür
+    binary_sensor.motion_sensor_158d000113c70a:
+      friendly_name: Bewegung
+    sensor.humidity_158d0001584ffd:
+      friendly_name: Luftfeuchtigkeit innen
+    sensor.temperature_158d0001584ffd:
+      friendly_name: Temperatur innen
+    
 
+# A
+automation: !include automations.yaml
+
+# B
+binary_sensor: !include binary_sensor.yaml
+
+# C
 config:
-
-http:
-  api_password: !secret http_password
-
-updater:
-
-discovery:
-
 conversation:
 
+# D
+# device_tracker: !include device_tracker.yaml
+# discovery:
+
+# F
+frontend:
+
+# G
+group: !include group.yaml
+
+# H
 history:
+http: !include http.yaml
 
+# I
+ifttt: !include ifttt.yaml
+
+# L
+light: !include light.yaml
 logbook:
+logger:
 
+# N
+notify: !include notify.yaml
+
+# S
+sensor: !include sensor.yaml
+switch: !include switch.yaml
 sun:
 
-sensor: !include sensor.yaml
 
-tts:
-  platform: google
+# T
+tts: !include tts.yaml
 
-light: !include light.yaml
+# U
+updater:
 
-ifttt:
-  key: !secret ifttt
-
-automation: !include automation.yaml
-
-device_tracker: !include device_tracker.yaml
-
-
+# X
+xiaomi: !include xiaomi.yaml

@@ -1,6 +1,9 @@
 - platform: yr
+  monitored_conditions:
+    - temperature
+    - symbol
+    - humidity
+
 - platform: time_date
   display_options:
     - 'time'
-
-

@@ -1,0 +1,26 @@
+- platform: broadlink
+  host: !secret broadlink_host
+  mac: !secret broadlink_mac
+  switches:
+    steckdose_a:
+      friendly_name: "Steckdose alles"
+      command_on: 'sgCgAQseCh4KHh4KCx4KHgoeHgoKHgseCh4KHgsdHwoKHh4KCh4fCgoeHwkLHQseCh4eCgoAATgKHgoeCh4fCgoeCh4KHh8KCh4KHgoeCx0LHh4KCh4fCgoeHgoKHh8KCh4KHgoeHwoKAAE3Cx0LHgoeHgoKHgseCh4eCgoeCx4KHgoeCh4fCgoeHgoKHh8KCh4fCQsdCx4KHh8JCwABNwoeCh4KHh8KCh4KHgoeHwoKHgoeCh4LHgoeHgoKHh8KCh4fCQseHgoKHgoeCx4eCgoAATcLHgoeCh4fCQseCh4KHh4KCx4KHgoeHgoLHR8KCh4fCgoeHgoLHR8KHgoeCh8KHgoKAAE3Cx4KHgoeHwkLHQseCh4fCQseCh4KHh4KCx4eCgoeHwkLHh4KCh4fCh4KHwkfCh4KCgABNwsdCx4KHh4KCx4KHgoeHgoKHgseCh4eCgsdHwoKHh4KCx4eCgoeHwkfCh4KHgofCgoAATcKHgseCh4eCgoeCx4KHh4KCx0LHgoeHgoLHR8JCx4eCgoeHwoKHh4KHwoeCh8JHwoKAAXcAAAAAAAAAAA='
+      command_off: 'sgY0AAsfCx8LHh8LCx8LHgweHwsLHgweDB8LHwsfIAoLHx8KCx4fCwsfIAoLHx8KCx4LHwsAATgAAAAA'
+    tv_grundig:
+      friendly_name: "Fernseher"
+      command_on: 'JgA0AB0aOBodGh0aHRocGh02HBodGjgaHRodAAsLHRo4Gh0aHBscGh0aHTUdGh0aOBodGh0ADQUAAAAA'
+      command_off: 'JgA0ABwbHBs3GxwbHBscGxwbHBocNh0aOBscAAsLHBscGzcbHBscGxwbGxscGxw1HRs4GhwADQUAAAAA'
+
+
+
+- platform: template
+  switches:
+    netflix:
+      friendly_name: "Netflix"
+      value_template: "{{ is_state('switch.fernseher', 'on') }}"
+      turn_on:
+        service: homeassistant.turn_on
+        entity_id: switch.steckdose_alles
+      turn_off:
+        service: homeassistant.turn_off
+        entity_id: switch.fernseher

@@ -1,0 +1,127 @@
+- action:
+  - alias: turn on kitchen light
+    data:
+      entity_id: light.kuche
+    service: homeassistant.toggle
+  alias: turn on kitchen lights
+  id: '1500402453695'
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d000113c70a
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: binary_sensor.motion_sensor_158d000113c70a
+    from: 'on'
+    platform: state
+    to: 'off'
+
+
+- id: 'uli1'
+  alias: "Aufstehen unter der Woche"
+  trigger:
+    - platform: time
+      hours: 6
+      minutes: 30
+      seconds: 00
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.wohnung
+    data:
+      brightness: 50
+
+
+- id: 'uli2'
+  alias: "Tür öffnen, Licht an"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d00011c8d52
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: sun
+        before: sunrise
+      # before_offset: "+1:00:00" # eine Stunde nach Sonnenaufgang
+        
+      - condition: sun
+        after: sunset
+        # after_offset: "-1:00:00" # eine Stunde vor Sonnenuntergang
+  action:
+    - service: homeassistant.turn_on
+      entity_id: light.flur
+
+
+- id: 'uli3'
+  alias: "Nachricht, wenn Tür geöffnet wird"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d00011c8d52
+    to: 'on'
+  action:
+    - service: notify.slack_msg
+      data:
+        message: 'Tür wurde geöffnet'
+     
+
+- id: 'uli4'
+  alias: "Button halten"
+  trigger:
+    platform: state
+    entity_id: switch.switch_long_press_158d000156295f
+    to: 'on'
+  action:
+    service: light.turn_off
+
+
+- id: 'uli5'
+  alias: "Button 1 Klick"
+  trigger:
+    platform: state
+    entity_id: switch.switch_one_click_158d000156295f
+  action:
+    service: homeassistant.toggle
+    entity_id: light.wohnung, light.flur
+
+
+- id: 'uli6'
+  alias: "Button 2 Klick"
+  trigger:
+    platform: state
+    entity_id: switch.switch_double_click_158d000156295f
+  action:
+    service: homeassistant.toggle
+    entity_id: light.kuche, light.wohnung, light.flur
+
+
+- id: 'uli7'
+  alias: "Netflix an"
+  trigger:
+    platform: state
+    entity_id: switch.steckdose_alles
+    to: 'on'
+    for:
+      seconds: 8
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.fernseher
+
+
+- id: 'uli8'
+  alias: "Netflix aus"
+  trigger:
+    platform: state
+    entity_id: switch.fernseher
+    to: 'off'
+    for:
+      seconds: 5
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.steckdose_alles

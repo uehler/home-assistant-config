@@ -1,0 +1,88 @@
+# views
+default_view:
+  view: yes
+  entities:
+    - group.lights
+    - group.scenes
+    - group.info
+
+devices:
+  name: Geräte
+  view: yes
+  entities:
+    # - group.devicegroup
+    - group.remote_plugs
+    - group.electronic_devices
+
+
+# groups
+lights:
+  name: Lichter
+  entities:
+    - light.wohnung
+    - light.kuche
+    - light.flur
+    - light.gateway_light_286c0788b99e
+
+
+scenes:
+  name: "Szenen"
+  entities:
+    - switch.netflix
+
+
+info:
+  name: Infos
+  entities:
+    - sensor.time
+    - sensor.yr_symbol
+    - sun.sun
+    - sensor.yr_temperature
+    - sensor.temperature_158d0001584ffd
+    - sensor.yr_humidity
+    - sensor.humidity_158d0001584ffd
+    - binary_sensor.door_window_sensor_158d00011c8d52
+    - binary_sensor.motion_sensor_158d000113c70a
+
+switches:
+  name: Switches
+  entities:
+    - switch.switch_long_press_158d000156295f
+    - switch.switch_one_click_158d000156295f
+    - switch.switch_double_click_158d000156295f
+
+sensors:
+  name: Sensoren
+  view: yes
+  entities:
+    - group.info
+    - group.switches
+# devicegroup:
+#   name: Geräte
+#   entities:
+    # - device_tracker.oneplus
+    # - device_tracker.ulismbp  
+
+remote_plugs:
+  name: Steckdosen
+  entities:
+    - switch.steckdose_alles
+
+
+electronic_devices:
+  name: "Geräte"
+  entities:
+    - switch.fernseher
+
+
+automation:
+  name: automation
+  view: yes
+  entities: 
+    - automation.aufstehen_unter_der_woche
+    - automation.tur_offnen_licht_an
+    - automation.button_halten
+    - automation.button_1_klick
+    - automation.button_2_klick
+    - automation.netflix_an
+    - automation.netflix_aus
