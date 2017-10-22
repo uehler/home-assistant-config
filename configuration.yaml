@@ -1,3 +1,5 @@
+hassio:
+
 homeassistant:
   name: Home
   latitude: !secret latitude
@@ -84,4 +86,4 @@ tts: !include tts.yaml
 updater:
 
 # X
-xiaomi: !include xiaomi.yaml
+xiaomi_aqara: !include xiaomi.yaml
