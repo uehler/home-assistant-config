@@ -34,6 +34,7 @@ scenes:
 info:
   name: Infos
   entities:
+    - sensor.mold_indicator
     - sensor.time
     - sensor.yr_symbol
     - sun.sun

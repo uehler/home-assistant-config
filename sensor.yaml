@@ -7,3 +7,9 @@
 - platform: time_date
   display_options:
     - 'time'
+
+- platform: mold_indicator
+  indoor_temp_sensor: sensor.temperature_158d0001584ffd
+  indoor_humidity_sensor: sensor.humidity_158d0001584ffd
+  outdoor_temp_sensor: sensor.yr_temperature
+  calibration_factor: 2.0

@@ -3,7 +3,6 @@
     data:
       entity_id: light.kuche
     service: homeassistant.toggle
-  alias: turn on kitchen lights
   id: '1500402453695'
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d000113c70a
@@ -14,23 +13,57 @@
     from: 'on'
     platform: state
     to: 'off'
+  # condition:
+  # - condition: or
+  #   conditions:
+  #   - before: sunrise
+  #     condition: sun
+  #   - after: sunset
+  #     condition: sun
+  # - after: sunrise
+  #   after_offset: '60'
+  #   before: sunset
+  #   before_offset: '60'
+  #   condition: sun
 
-
-- id: 'uli1'
-  alias: "Aufstehen unter der Woche"
+- id: uli2
+  alias: "T\xFCr \xF6ffnen, Licht an"
   trigger:
-    - platform: time
-      hours: 6
-      minutes: 30
-      seconds: 00
+  - entity_id: binary_sensor.door_window_sensor_158d00011c8d52
+    platform: state
+    to: 'on'
+  # condition:
+  # - condition: or
+  #   conditions:
+  #   - before: sunrise
+  #     condition: sun
+  #   - after: sunset
+  #     condition: sun
+  # - after: sunrise
+  #   after_offset: '60'
+  #   before: sunset
+  #   before_offset: '60'
+  #   condition: sun
+  action:
+    entity_id: light.flur
+    service: homeassistant.turn_on
+
+
+- id: uli1
+  alias: Aufstehen unter der Woche
+  trigger:
+  - platform: time
+    hours: 6
+    minutes: 30
+    seconds: 0
   condition:
   - condition: time
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
     service: homeassistant.turn_on
     entity_id: light.wohnung
@@ -38,71 +71,42 @@
       brightness: 50
 
 
-- id: 'uli2'
-  alias: "Tür öffnen, Licht an"
-  trigger:
-    platform: state
-    entity_id: binary_sensor.door_window_sensor_158d00011c8d52
-    to: 'on'
-  condition:
-    condition: or
-    conditions:
-      - condition: sun
-        before: sunrise
-      # before_offset: "+1:00:00" # eine Stunde nach Sonnenaufgang
-        
-      - condition: sun
-        after: sunset
-        # after_offset: "-1:00:00" # eine Stunde vor Sonnenuntergang
-  action:
-    - service: homeassistant.turn_on
-      entity_id: light.flur
-
-
-- id: 'uli3'
-  alias: "Nachricht, wenn Tür geöffnet wird"
+- id: uli3
+  alias: "Nachricht, wenn T\xFCr ge\xF6ffnet wird"
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d00011c8d52
     to: 'on'
   action:
-    - service: notify.slack_msg
-      data:
-        message: 'Tür wurde geöffnet'
-     
-
-- id: 'uli4'
-  alias: "Button halten"
+  - service: notify.slack_msg
+    data:
+      message: "T\xFCr wurde ge\xF6ffnet"
+- id: uli4
+  alias: Button halten
   trigger:
     platform: state
     entity_id: switch.switch_long_press_158d000156295f
     to: 'on'
   action:
     service: light.turn_off
-
-
-- id: 'uli5'
-  alias: "Button 1 Klick"
+- id: uli5
+  alias: Button 1 Klick
   trigger:
     platform: state
     entity_id: switch.switch_one_click_158d000156295f
   action:
     service: homeassistant.toggle
     entity_id: light.wohnung, light.flur
-
-
-- id: 'uli6'
-  alias: "Button 2 Klick"
+- id: uli6
+  alias: Button 2 Klick
   trigger:
     platform: state
     entity_id: switch.switch_double_click_158d000156295f
   action:
     service: homeassistant.toggle
     entity_id: light.kuche, light.wohnung, light.flur
-
-
-- id: 'uli7'
-  alias: "Netflix an"
+- id: uli7
+  alias: Netflix an
   trigger:
     platform: state
     entity_id: switch.steckdose_alles
@@ -112,10 +116,8 @@
   action:
     service: homeassistant.turn_on
     entity_id: switch.fernseher
-
-
-- id: 'uli8'
-  alias: "Netflix aus"
+- id: uli8
+  alias: Netflix aus
   trigger:
     platform: state
     entity_id: switch.fernseher
