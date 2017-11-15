@@ -36,6 +36,8 @@ homeassistant:
       friendly_name: Luftfeuchtigkeit innen
     sensor.temperature_158d0001584ffd:
       friendly_name: Temperatur innen
+    sensor.illumination_286c0788b99e:
+      friendly_name: Helligkeit
     
 
 # A

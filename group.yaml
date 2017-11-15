@@ -44,6 +44,7 @@ info:
     - sensor.humidity_158d0001584ffd
     - binary_sensor.door_window_sensor_158d00011c8d52
     - binary_sensor.motion_sensor_158d000113c70a
+    - sensor.illumination_286c0788b99e
 
 switches:
   name: Switches
