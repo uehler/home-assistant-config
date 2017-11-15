@@ -1,9 +1,5 @@
-- action:
-  - alias: turn on kitchen light
-    data:
-      entity_id: light.kuche
-    service: homeassistant.toggle
-  id: '1500402453695'
+- id: kitchen_light_on_if_motion
+  alias: Küchenlicht an bei Bewegung
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d000113c70a
     from: 'off'
@@ -13,6 +9,11 @@
     from: 'on'
     platform: state
     to: 'off'
+  action:
+    service: homeassistant.toggle
+    data:
+      entity_id: light.kuche
+  
   # condition:
   # - condition: or
   #   conditions:
@@ -81,27 +82,55 @@
   - service: notify.slack_msg
     data:
       message: "T\xFCr wurde ge\xF6ffnet"
-- id: uli4
-  alias: Button halten
+
+
+- id: xiaomi_single_click
+  alias: Flurlicht an
   trigger:
-    platform: state
-    entity_id: switch.switch_long_press_158d000156295f
-    to: 'on'
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d000156295f
+      click_type: single
+  action:
+    service: light.turn_on
+    entity_id: light.flur
+
+- id: xiaomi_double_click
+  alias: Flur aus Wohnung an
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d000156295f
+      click_type: double
+  action:
+    - service: light.turn_off
+      entity_id: light.flur
+    - service: light.turn_on
+      entity_id: light.wohnung
+
+# hold event is fired when long_click_press is released
+# - id: xiaomi_hold
+#   alias: Testklick_3
+#   trigger:
+#     platform: event
+#     event_type: click
+#     event_data:
+#       entity_id: binary_sensor.switch_158d000156295f
+#       click_type: hold
+#   action:
+#   - service: notify.slack_msg
+#     data:
+#       message: "xiaomi_hold"
+
+- id: xiaomi_long_click_press
+  alias: Shutdown
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d000156295f
+      click_type: long_click_press
   action:
     service: light.turn_off
-- id: uli5
-  alias: Button 1 Klick
-  trigger:
-    platform: state
-    entity_id: switch.switch_one_click_158d000156295f
-  action:
-    service: homeassistant.toggle
-    entity_id: light.wohnung, light.flur
-- id: uli6
-  alias: Button 2 Klick
-  trigger:
-    platform: state
-    entity_id: switch.switch_double_click_158d000156295f
-  action:
-    service: homeassistant.toggle
-    entity_id: light.kuche, light.wohnung, light.flur

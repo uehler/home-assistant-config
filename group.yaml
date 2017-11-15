@@ -88,10 +88,10 @@ automation:
   name: automation
   view: yes
   entities: 
-    - automation.aufstehen_unter_der_woche
+    - automation.kuchenlicht_an_bei_bewegung
     - automation.tur_offnen_licht_an
-    - automation.button_halten
-    - automation.button_1_klick
-    - automation.button_2_klick
-    - automation.netflix_an
-    - automation.netflix_aus
+    - automation.aufstehen_unter_der_woche
+    - automation.nachricht_wenn_tur_geoffnet_wird
+    - automation.flurlicht_an
+    - automation.flur_aus_wohnung_an
+    - automation.shutdown
