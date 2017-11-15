@@ -15,12 +15,10 @@
 
 - platform: template
   switches:
-    netflix:
+    netflix_switch:
       friendly_name: "Netflix"
       value_template: "{{ is_state('switch.fernseher', 'on') }}"
       turn_on:
-        service: homeassistant.turn_on
-        entity_id: switch.steckdose_alles
+        service: script.netflix_on
       turn_off:
-        service: homeassistant.turn_off
-        entity_id: switch.fernseher
+        service: script.netflix_off

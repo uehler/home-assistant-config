@@ -28,7 +28,7 @@ lights:
 scenes:
   name: "Szenen"
   entities:
-    - switch.netflix
+    - switch.netflix_switch
 
 
 info:
@@ -74,6 +74,14 @@ electronic_devices:
   name: "Geräte"
   entities:
     - switch.fernseher
+
+scripts:
+  name: Skripte
+  view: yes
+  entities:
+    - script.netflix_on
+    - script.netflix_off
+
 
 
 automation:

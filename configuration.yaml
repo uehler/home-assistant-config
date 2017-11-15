@@ -75,6 +75,7 @@ notify: !include notify.yaml
 
 # S
 sensor: !include sensor.yaml
+script: !include scripts.yaml
 switch: !include switch.yaml
 sun:
 

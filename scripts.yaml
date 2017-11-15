@@ -1,0 +1,27 @@
+netflix_on:
+  alias: Netflix an
+  sequence:
+    - alias: Steckdose an
+      service: homeassistant.turn_on
+      data:
+        entity_id: switch.steckdose_alles
+    - delay:
+        seconds: 8
+    - alias: Netflix an
+      service: homeassistant.turn_on
+      data:
+        entity_id: switch.fernseher
+
+netflix_off:
+  alias: Netflix aus
+  sequence:
+    - alias: Netflix aus
+      service: homeassistant.turn_off
+      data:
+        entity_id: switch.fernseher
+    - delay:
+        seconds: 5
+    - alias: Steckdose aus
+      service: homeassistant.turn_off
+      data:
+        entity_id: switch.steckdose_alles

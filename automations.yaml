@@ -105,25 +105,3 @@
   action:
     service: homeassistant.toggle
     entity_id: light.kuche, light.wohnung, light.flur
-- id: uli7
-  alias: Netflix an
-  trigger:
-    platform: state
-    entity_id: switch.steckdose_alles
-    to: 'on'
-    for:
-      seconds: 8
-  action:
-    service: homeassistant.turn_on
-    entity_id: switch.fernseher
-- id: uli8
-  alias: Netflix aus
-  trigger:
-    platform: state
-    entity_id: switch.fernseher
-    to: 'off'
-    for:
-      seconds: 5
-  action:
-    service: homeassistant.turn_off
-    entity_id: switch.steckdose_alles
