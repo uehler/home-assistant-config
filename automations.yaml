@@ -5,15 +5,23 @@
     from: 'off'
     platform: state
     to: 'on'
+  action:
+    service: homeassistant.turn_on
+    data:
+      entity_id: light.kuche
+
+- id: kitchen_light_off_if_no_motion
+  alias: Küchenlicht aus ohne Bewegung
+  trigger:
   - entity_id: binary_sensor.motion_sensor_158d000113c70a
     from: 'on'
     platform: state
     to: 'off'
   action:
-    service: homeassistant.toggle
+    service: homeassistant.turn_off
     data:
       entity_id: light.kuche
-  
+
   # condition:
   # - condition: or
   #   conditions:

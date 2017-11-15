@@ -89,6 +89,7 @@ automation:
   view: yes
   entities: 
     - automation.kuchenlicht_an_bei_bewegung
+    - automation.kuchenlicht_aus_ohne_bewegung
     - automation.tur_offnen_licht_an
     - automation.aufstehen_unter_der_woche
     - automation.nachricht_wenn_tur_geoffnet_wird
