@@ -51,8 +51,7 @@ config:
 conversation:
 
 # D
-# device_tracker: !include device_tracker.yaml
-# discovery:
+discovery:
 
 # F
 frontend:
@@ -64,13 +63,9 @@ group: !include group.yaml
 history:
 http: !include http.yaml
 
-# I
-ifttt: !include ifttt.yaml
-
 # L
 light: !include light.yaml
 logbook:
-logger:
 
 # N
 notify: !include notify.yaml
@@ -80,7 +75,6 @@ sensor: !include sensor.yaml
 script: !include scripts.yaml
 switch: !include switch.yaml
 sun:
-
 
 # T
 tts: !include tts.yaml

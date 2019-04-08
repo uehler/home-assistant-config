@@ -6,13 +6,15 @@ default_view:
     - group.scenes
     - group.info
 
+
+
 devices:
   name: Geräte
   view: yes
   entities:
-    # - group.devicegroup
     - group.remote_plugs
     - group.electronic_devices
+
 
 
 # groups
@@ -25,16 +27,17 @@ lights:
     - light.gateway_light_286c0788b99e
 
 
+
 scenes:
   name: "Szenen"
   entities:
     - switch.netflix_switch
 
 
+
 info:
   name: Infos
   entities:
-    - sensor.mold_indicator
     - sensor.time
     - sensor.yr_symbol
     - sun.sun
@@ -46,6 +49,8 @@ info:
     - binary_sensor.motion_sensor_158d000113c70a
     - sensor.illumination_286c0788b99e
 
+
+
 switches:
   name: Switches
   entities:
@@ -53,17 +58,16 @@ switches:
     - switch.switch_one_click_158d000156295f
     - switch.switch_double_click_158d000156295f
 
+
+
 sensors:
   name: Sensoren
   view: yes
   entities:
     - group.info
     - group.switches
-# devicegroup:
-#   name: Geräte
-#   entities:
-    # - device_tracker.oneplus
-    # - device_tracker.ulismbp  
+
+
 
 remote_plugs:
   name: Steckdosen
@@ -71,10 +75,13 @@ remote_plugs:
     - switch.steckdose_alles
 
 
+
 electronic_devices:
   name: "Geräte"
   entities:
     - switch.fernseher
+
+
 
 scripts:
   name: Skripte

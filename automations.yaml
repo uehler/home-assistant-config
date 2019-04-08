@@ -10,6 +10,8 @@
     data:
       entity_id: light.kuche
 
+
+
 - id: kitchen_light_off_if_no_motion
   alias: Küchenlicht aus ohne Bewegung
   trigger:
@@ -22,18 +24,7 @@
     data:
       entity_id: light.kuche
 
-  # condition:
-  # - condition: or
-  #   conditions:
-  #   - before: sunrise
-  #     condition: sun
-  #   - after: sunset
-  #     condition: sun
-  # - after: sunrise
-  #   after_offset: '60'
-  #   before: sunset
-  #   before_offset: '60'
-  #   condition: sun
+
 
 - id: uli2
   alias: "T\xFCr \xF6ffnen, Licht an"
@@ -41,30 +32,17 @@
   - entity_id: binary_sensor.door_window_sensor_158d00011c8d52
     platform: state
     to: 'on'
-  # condition:
-  # - condition: or
-  #   conditions:
-  #   - before: sunrise
-  #     condition: sun
-  #   - after: sunset
-  #     condition: sun
-  # - after: sunrise
-  #   after_offset: '60'
-  #   before: sunset
-  #   before_offset: '60'
-  #   condition: sun
   action:
     entity_id: light.flur
     service: homeassistant.turn_on
+
 
 
 - id: uli1
   alias: Aufstehen unter der Woche
   trigger:
   - platform: time
-    hours: 6
-    minutes: 30
-    seconds: 0
+    at: '06:30:00'
   condition:
   - condition: time
     weekday:
@@ -80,6 +58,7 @@
       brightness: 50
 
 
+
 - id: uli3
   alias: "Nachricht, wenn T\xFCr ge\xF6ffnet wird"
   trigger:
@@ -92,11 +71,12 @@
       message: "T\xFCr wurde ge\xF6ffnet"
 
 
+
 - id: xiaomi_single_click
   alias: Flurlicht an
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d000156295f
       click_type: single
@@ -104,11 +84,13 @@
     service: light.turn_on
     entity_id: light.flur
 
+
+
 - id: xiaomi_double_click
   alias: Flur aus Wohnung an
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d000156295f
       click_type: double
@@ -118,25 +100,13 @@
     - service: light.turn_on
       entity_id: light.wohnung
 
-# hold event is fired when long_click_press is released
-# - id: xiaomi_hold
-#   alias: Testklick_3
-#   trigger:
-#     platform: event
-#     event_type: click
-#     event_data:
-#       entity_id: binary_sensor.switch_158d000156295f
-#       click_type: hold
-#   action:
-#   - service: notify.slack_msg
-#     data:
-#       message: "xiaomi_hold"
+
 
 - id: xiaomi_long_click_press
   alias: Shutdown
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d000156295f
       click_type: long_click_press
