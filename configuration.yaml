@@ -1,5 +1,7 @@
 hassio:
 
+default_config:
+
 homeassistant:
   name: Home
   latitude: !secret latitude
@@ -74,9 +76,6 @@ sensor: !include sensor.yaml
 script: !include scripts.yaml
 switch: !include switch.yaml
 sun:
-
-# U
-updater:
 
 # X
 xiaomi_aqara: !include xiaomi.yaml
